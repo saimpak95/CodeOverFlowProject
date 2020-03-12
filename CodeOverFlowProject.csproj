@@ -102,6 +102,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Images\User.ico" />
+    <Content Include="Images\VoteDownBlack.ico" />
+    <Content Include="Images\VoteDownColor.ico" />
+    <Content Include="Images\VoteUpBlack.png" />
+    <Content Include="Images\VoteUpColor.ico" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -125,7 +130,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
