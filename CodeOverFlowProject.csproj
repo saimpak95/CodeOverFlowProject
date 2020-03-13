@@ -138,6 +138,12 @@
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CodeOverFlowProject.DomainModels\CodeOverFlowProject.DomainModels.csproj">
+      <Project>{7efbf781-1321-45a3-a483-b710d4c1195c}</Project>
+      <Name>CodeOverFlowProject.DomainModels</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
