@@ -61,7 +61,7 @@
                             <img src="~/Images/VoteDownColor.png" class="btnDownVote" style="cursor:pointer; width:25px" data-AnswerID="@Model.Answers[i].AnswerID" />
 
                         }
-                        else
+                        if(Model.Answers[i].CurrentUserVoteType == 0)
                         {
                             <img src="~/Images/VoteUp.png" class="btnUpVote" style="cursor:pointer; width:25px" data-AnswerID="@Model.Answers[i].AnswerID" />
                             <img src="~/Images/VoteDown.png" class="btnDownVote" style="cursor:pointer; width:25px" data-AnswerID="@Model.Answers[i].AnswerID" />
@@ -159,10 +159,10 @@
 
 <script>
     $(".btnUpVote").click(function() {
-      
+    
        var UpBtn = $(this);
        var DownBtn = UpBtn.parent().find(".btnDownVote");
-     
+       
    
 
         if (UpBtn.attr("src") == "/Images/VoteUp.png") {
@@ -174,15 +174,16 @@
         else 
                 value = 2;
  
-               Alert("sasas");
+            alert("I am an alert box!");
+
             $.ajax({
               
                 url: "/api/Questions?AnswerID=" + UpBtn.attr("data-AnswerID") + "&Value=" + value + "&UserID=@Session["CurrentUserID"]", type: "POST", success: function () {
                 
 
                     UpBtn.parent().find(".VotesCount").text(parseInt(UpBtn.parent().find(".VotesCount").text() + value));
-                    Upbtn.attr("src", "~/Images/VoteUpColor.png");
-                    DownBtn.attr("src", "~/Images/VoteDown.png");
+                    UpBtn.attr("src", "/Images/VoteUpColor.png");
+                    DownBtn.attr("src", "/Images/VoteDown.png");
 
 
 
@@ -224,7 +225,7 @@
 
 
 
-    $(".btnDownVote").click(function () {
+    @*$(".btnDownVote").click(function () {
           alert("I am an alert box!");
           window.alert("sometext");
           var DownBtn = $(this);
@@ -256,7 +257,7 @@
             }
 
 
-    });
+    });*@
 
 
 </script>
