@@ -1,0 +1,50 @@
+﻿@model CodeOverFlowProject.ViewModels.EditUserDetailModel
+@{
+    ViewBag.Title = "ChangeProfile";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h1>CHANGE PROFILE</h1>
+        <form novalidate="novalidate" action="~/Account/ChangeProfile" method="post" class="was-validated needs-validation">
+            @Html.AntiForgeryToken()
+            <div class="form-row">
+                <div class="form-group col-sm-6">
+                    <label>NAME</label>
+                    <input type="text" class="form-control" id="TXTName" placeholder="Enter Name" value="@Model.UserName" name="UserName" required="required" pattern="^[a-zA-Z ]*$" />
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please Enter [Alphabate only]
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    <label>EMAIL</label>
+                    @Html.HiddenFor(temp=>temp.Email)
+                    <input type="email" class="form-control" value="@Model.Email" id="TXTEmail" disabled placeholder="Email" name="Email" required="required" />
+                </div>
+
+                <div class="form-group col-sm-6">
+                    <label>PHONE</label>
+                    <input type="number" class="form-control" id="TXTPhone" value="@Model.Mobile" placeholder="Enter Phone#" name="Mobile" required="required" maxlength="11" />
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Invalid Phone #
+                    </div>
+                    <br />
+                    <button class="btn" type="submit" style="background-color:#424874; color:white">UPDATE PROFILE</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+
+    $("a[href='/Account/ChangeProfile']").attr("id", "active")
+</script>

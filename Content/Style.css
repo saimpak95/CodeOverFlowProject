@@ -1,0 +1,39 @@
+﻿.navbar {
+    background-color: #424874;
+}
+
+#active{
+    color:white !important;
+}
+
+.navbar a:link, .navbar a:visited {
+    color: #dcd6f7 !important;
+}
+
+.navbar a:hover {
+    color: white !important;
+    text-decoration:underline;
+}
+.hidden{
+    display:none;
+}
+
+.MySelector {
+
+    background-color: #424874;
+    color:white
+}
+
+.dropdown-item:hover {
+    background-color: #424874 !important;
+    color: white !important
+}
+
+.MySelector:hover {
+    background-color: #424874 !important;
+    color: white !important
+}
+
+.MySelectorText {
+    color: #424874;
+}

@@ -1,0 +1,23 @@
+﻿@model List<CodeOverFlowProject.ViewModels.QuestionViewModel>
+@{
+    ViewBag.title = "Search";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h4>Seach result for @ViewBag.SearchValue </h4>
+        <table class="table">
+            @foreach (var item in Model)
+            {
+                Html.RenderPartial("QuestionView", item);
+            }
+        </table>
+        @if (Session["CurrentUserID"] != null)
+        {
+            <a href="/Questions/Create" class="btn MySelector">Add Question</a>
+        }
+    </div>
+</div>
+<script>
+    $("a[href='/AllQuestions']").attr("id","active")
+</script>

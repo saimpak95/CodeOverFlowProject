@@ -1,0 +1,44 @@
+﻿@model CodeOverFlowProject.ViewModels.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+}
+
+    <h2>Login</h2>
+    <form action="~/Account/Login" method="post"  novalidate="novalidate" class="was-validated">
+        @Html.AntiForgeryToken()
+        <div class="form-row mx-auto" style="width:300px">
+            <div class="form-group col-md-12">
+                <label>Email</label><br />
+                <input type="email" id="Email" name="Email" placeholder="Email" required="required" autofocus="autofocus" value="@Model.Email" />
+                <div class="valid-feedback">
+                    looks good!
+                </div>
+                <div class="invalid-feedback">
+                    invalid Email
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <label>Password</label><br />
+                <input type="password" id="password" name="Password" placeholder="Password" required="required" value="@Model.Password" minlength="6" />
+                <div class="valid-feedback">
+                    looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Password must contain atleas 6 characters
+                </div>
+
+            </div>
+            <div class="form-group col-md-12">
+
+                <button type="submit" class="btn MySelector">LOGIN</button>
+                <div class="text-danger"> @Html.ValidationSummary()</div>
+            </div>
+           
+        </div>
+
+    </form>
+
+<script>
+   $("a[href='/Account/Login']").attr("id","active")
+</script>
+

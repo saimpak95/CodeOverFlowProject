@@ -1,0 +1,29 @@
+﻿@model List<CodeOverFlowProject.ViewModels.QuestionViewModel>
+@{
+    ViewBag.Title = "Home";
+
+}
+
+@section HomeCard{
+
+<div class="jumbotron">
+<h2>Learn, Shared, Build!</h2>
+<h3>Each month, over 50 millions developers come to CodeOverFlow to learn, share their knowledge, and build their careers</h3>
+<p class="lead">Join the world's largest developer community</p>
+</div>
+
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table">
+            @foreach (var item in Model)
+            {
+                Html.RenderPartial("QuestionView", item);
+            }
+        </table>
+    </div>
+</div>
+<script>
+    $("a[href='/Home']").attr("id","active")
+</script>

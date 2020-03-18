@@ -1,0 +1,25 @@
+﻿@model CodeOverFlowProject.ViewModels.QuestionViewModel
+
+<tr>
+    <td><span class="badge badge-secondary"> @Model.VotesCount</span> Votes</td>
+    <td><span class="badge badge-secondary">@Model.AnswersCount</span> Answers</td>
+    <td><span class="badge badge-secondary">@Model.ViewsCount</span> Views</td>
+    <td class="text-dark">
+        <a href="/Questions/View/@Model.QuestionID" style="color:#424874">@Model.QuestionName</a>
+        <br />
+        <span class="badge badge-info" style="background-color:#424874"><b> @Model.Category.CategoryName</b></span>
+    </td>
+    <td>
+        @if (Convert.ToInt32(Session["CurrentUserID"]) != Model.UserID)
+        {
+            @:by @Model.User.UserName
+        }
+        else
+        {
+
+            @:by me
+        }
+
+    </td>
+    <td>on @Model.QuestionDateAndTime</td>
+</tr>

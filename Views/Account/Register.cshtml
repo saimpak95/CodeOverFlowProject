@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+}
+<div class="row">
+    <div class="col-sm-12">
+        <h1>REGISTRATION</h1>
+        <form novalidate="novalidate" action="~/Account/Register" method="post" class="was-validated needs-validation">
+           @Html.AntiForgeryToken()
+            <div class="form-row">
+                <div class="form-group col-sm-6">
+                    <label>NAME</label>
+                    <input type="text" class="form-control" id="TXTName" placeholder="Enter Name" name="UserName" required="required" pattern="^[a-zA-Z ]*$" />
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please Enter [Alphabate only] 
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    <label>EMAIL</label>
+                    <input type="email" class="form-control" id="TXTEmail" placeholder="Enter Email" name="Email" required="required" />
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Invalid Email
+                    </div>
+                    <small class="email-exist text-danger"></small>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    <label>PHONE</label>
+                    <input type="number" class="form-control" id="TXTPhone" placeholder="Enter Phone#" name="Mobile" required="required" maxlength="11" />
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Invalid Phone #
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    <label>PASSWORD</label>
+                    <input type="password" class="form-control" id="TXTPassword" placeholder="Password" name="Password" required="required" minlength="6" oninput="form.ConfirmPassword.pattern=escapeRegExp(this.value)"/>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Password must contain atleast 6 characters
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                    <label>CONFIRM PASSWORD</label>
+                    <input type="password" class="form-control" id="TXTConfirmPassword" placeholder="Confirm Password" name="ConfirmPassword" required="required" minlength="6" />
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Password And Confirm Password do not match
+                    </div>
+                    <br />
+                    
+                    <button class="btn" type="submit" style="background-color:#424874; color:white">REGISTER</button>
+                </div>
+                
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+
+    $("#TXTEmail").blur(function () {
+
+     
+        $.ajax({
+        
+            type: "GET", url: "/api/Account?Email=" + $("#TXTEmail").val(), success : function (response) {
+                
+                if (response == "Not Found") {
+                    $(".email-exist").text("");
+                }
+                else {
+                    $(".email-exist").text("Email alread exist!");
+                    $(".email-exist").parent(".form-group").find(".valid-feedback").css("color","white")
+                }
+
+
+            }, error: function () { }
+        });
+
+    });
+
+     $("a[href='/Account/Register']").attr("id","active")
+</script>
+
