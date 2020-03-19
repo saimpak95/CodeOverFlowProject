@@ -1,0 +1,48 @@
+﻿@model CodeOverFlowProject.ViewModels.NewQuestionViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h3>Create Question</h3>
+        <form novalidate="novalidate" method="post" action="/Questions/Create" class="was-validated">
+            @Html.AntiForgeryToken()
+
+            <div class="form-row">
+                <div class="col-sm-12 form-group">
+                    <label>CATEGORY</label>
+                    <select class="form-control" name="CategoryID" required="required">
+                        <option value="">Please select category</option>
+                        @foreach (var item in ViewBag.Categories)
+                        {
+                            <option value="@item.CategoryID">@item.CategoryName</option>
+                        }
+
+                    </select>
+                    <div class="valid-feedback">
+                        looks good
+                    </div>
+                    <div class="invalid-feedback">
+                       Category can't be empty
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-sm-12 form-group">
+                    <label>QUESTION NAME</label>
+                    <textarea class="form-control" placeholder="Enter question.." name="QuestionName" required="required" autofocus="autofocus"></textarea>
+                    <div class="valid-feedback">
+                        looks good
+                    </div>
+                    <div class="invalid-feedback">
+                        Category can't be empty
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn MySelector">ADD QUESTION</button>
+            @Html.ValidationSummary()
+        </form>
+    </div>
+</div>

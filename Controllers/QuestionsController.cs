@@ -1,4 +1,5 @@
-﻿using CodeOverFlowProject.ServiceLayer;
+﻿using CodeOverFlowProject.CustomFilters;
+using CodeOverFlowProject.ServiceLayer;
 using CodeOverFlowProject.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -66,6 +67,36 @@ namespace CodeOverFlowProject.Controllers
             }
             
           
+        }
+
+        [UserAuthorizationFilter]
+        public ActionResult Create()
+        {
+            List<CategoryViewModel> categories = this.cs.GetCategories();
+            ViewBag.Categories = categories;
+            return View();
+        }
+
+        [ValidateAntiForgeryToken]
+        [UserAuthorizationFilter]
+        [HttpPost]
+        public ActionResult Create(NewQuestionViewModel question)
+        {
+            question.AnswersCount = 0;
+            question.VotesCount = 0;
+            question.ViewsCount = 0;
+            question.QuestionDateAndTime = DateTime.Now;
+            question.UserID = Convert.ToInt32(Session["CurrentUserID"]);
+            if (ModelState.IsValid)
+            {
+                this.qs.InsertQuestion(question);
+                return RedirectToAction("Question","Home");
+            }
+            else {
+
+                ModelState.AddModelError("x", "Invalid Data");
+                return View();
+              }
         }
     }
 }

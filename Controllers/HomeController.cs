@@ -43,7 +43,7 @@ namespace CodeOverFlowProject.Controllers
             return View(category);
         }
 
-        [Route("AllQuestions")]
+        
         public ActionResult Question()
         {
             List<QuestionViewModel> questions = this.qs.GetQuestion();
