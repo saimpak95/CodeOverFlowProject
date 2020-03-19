@@ -47,5 +47,23 @@ namespace CodeOverFlowProject.Controllers
             }
            
         }
+
+        [HttpPost]
+        public ActionResult EditAnswer(EditAnswerViewModel answer)
+        {
+            answer.UserID = Convert.ToInt32(Session["CurrentUserID"]);
+            if (ModelState.IsValid)
+            {
+                this.ass.UpdateAnswer(answer);
+                return RedirectToAction("View", new { id = answer.QuestionID });
+            }
+            else
+            {
+                ModelState.AddModelError("x", "invalid");
+                return RedirectToAction("View", new { id = answer.QuestionID });
+            }
+            
+          
+        }
     }
 }

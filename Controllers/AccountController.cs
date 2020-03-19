@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CodeOverFlowProject.CustomFilters;
 using CodeOverFlowProject.ServiceLayer;
 using CodeOverFlowProject.ViewModels;
 
@@ -88,7 +89,7 @@ namespace CodeOverFlowProject.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-    
+        [UserAuthorizationFilter]
         public ActionResult ChangeProfile()
         {
             int UserID = Convert.ToInt32(Session["CurrentUserID"]);
@@ -112,6 +113,7 @@ namespace CodeOverFlowProject.Controllers
             
         }
 
+        [UserAuthorizationFilter]
         public ActionResult ChangePassword()
         {
             int UserID = Convert.ToInt32(Session["CurrentUserID"]);

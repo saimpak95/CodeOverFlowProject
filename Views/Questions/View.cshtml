@@ -43,7 +43,7 @@
         {
             <div class="form-group form-row">
                 <div class="col-sm-2">
-                    <span class="badge badge-secondary col-2 .VotesCount">
+                    <span class="badge badge-secondary col-2 VotesCount">
                         @Model.Answers[i].VotesCount
                     </span>
                     votes
@@ -80,10 +80,11 @@
                     {
 
                         <p class="answer">@Model.Answers[i].AnswerText</p>
-                        <button class="btn MySelector BTNEdit">EDIT</button>
-                        <form class="hidden" novalidate="novalidate" action="Questions/EditAnswer" method="post">
+                        <button class="btn BTNHiddenEdit MySelector BTNEdit">EDIT</button>
+                        <form class="hidden NeedsValidation" novalidate="novalidate" action="/Questions/EditAnswer" method="post">
                             <div class="form-group form-row">
                                 <div class="col-sm-12">
+                                    <br />
                                     <h4>Edit your Answer</h4>
                                     @Html.AntiForgeryToken()
                                     <input type="hidden" name="AnswerID" value="@Model.Answers[i].AnswerID" />
@@ -99,6 +100,7 @@
                                             Please enter a answer..
                                         </div>
                                     </div>
+                                    <br />
                                 </div>
                                 <button class="btn MySelector" type="submit">UPDATE ANSWER</button>
                                 <div class="text-danger">
@@ -159,106 +161,84 @@
 
 <script>
     $(".btnUpVote").click(function() {
-    
+     
        var UpBtn = $(this);
        var DownBtn = UpBtn.parent().find(".btnDownVote");
        
-   
-
-        if (UpBtn.attr("src") == "/Images/VoteUp.png") {
+    if (UpBtn.attr("src") == "/Images/VoteUp.png") {
             var value;
          
               
         if (UpBtn.attr("src") == "/Images/VoteUp.png" && DownBtn.attr("src") == "/Images/VoteDown.png") 
             value = 1;  
         else 
-                value = 2;
+            value = 2;
  
-            alert("I am an alert box!");
 
             $.ajax({
               
                 url: "/api/Questions?AnswerID=" + UpBtn.attr("data-AnswerID") + "&Value=" + value + "&UserID=@Session["CurrentUserID"]", type: "POST", success: function () {
                 
-
+                 
                     UpBtn.parent().find(".VotesCount").text(parseInt(UpBtn.parent().find(".VotesCount").text() + value));
                     UpBtn.attr("src", "/Images/VoteUpColor.png");
                     DownBtn.attr("src", "/Images/VoteDown.png");
 
-
-
-                }, error: function () { }
+                     }, error: function () { }
             });
                    
-                
+
 
            }
           
 
     });
-</script>
-<script>
-     @*$(".btnUpVote").click(function ()
-     {
-          alert("I am an alert box!");
-        window.alert("sometext");
-        var UpBtn = $(this);
-        var DownBtn = UpBtn.parent().find(".btnDownVote");
-        if (UpBtn.attr("src") == "/Images/up-empty.png")
-        {
-            var value;
-            if (UpBtn.attr("src") == "/Images/up-empty.png" && DownBtn.attr("src") == "/Images/down-empty.png")
-                value = 1;
-            else
-                value = 2;
-
-            $.ajax({
-                url: "/api/questions?answerid=" + UpBtn.attr("data-answerid") + "&value=" + value + "&UserID=@Session["CurrentUserID"]", type: "POST", success: function ()
-                {
-                    UpBtn.parent().find(".votescount").text(parseInt(UpBtn.parent().find(".votescount").text()) + value);
-                    UpBtn.attr("src", "/Images/up-color.png");
-                    DownBtn.attr("src", "/Images/down-empty.png");
-                }
-            });
-        }
-    });*@
 
 
 
-    @*$(".btnDownVote").click(function () {
-          alert("I am an alert box!");
-          window.alert("sometext");
-          var DownBtn = $(this);
-          var UpBtn = DownBtn.parent().find(".btnUpVote");
+     $(".btnDownVote").click(function() {
+   
+       var DownBtn = $(this);
+       var UpBtn = DownBtn.parent().find(".btnUpVote");
+      
 
-
-          if (DownBtn.attr("src") == "/Images/White Down.png") {
-            var value;
-            if (UpBtn.attr("src") == "/Images/white_up_32.png" && DownBtn.attr("src") == "White Down.png")
-                value = -1;
-              else
+         if (DownBtn.attr("src") == "/Images/VoteDown.png") {
+             var value;
+          
+         
+             if (UpBtn.attr("src") == "/Images/VoteUp.png" && DownBtn.attr("src") == "/Images/VoteDown.png")
+            value = -1;  
+        else 
                 value = -2;
-
+ 
             $.ajax({
-                type: "POST", url: "/api/Questions?AnswerID=" + UpBtn.attr("data-AnswerID") + "&UserID="@Session["CurrentUserID"]"&Value=" + value, success: function () {
+              
+                url: "/api/Questions?AnswerID=" + UpBtn.attr("data-AnswerID") + "&Value=" + value + "&UserID=@Session["CurrentUserID"]", type: "POST", success: function () {
 
-
+                   
                     DownBtn.parent().find(".VotesCount").text(parseInt(DownBtn.parent().find(".VotesCount").text() + value));
-                    Upbtn.attr("src", "/Images/white_up_32.png");
-                    DownBtn.attr("src", "/Images/down_32.png");
+                    DownBtn.attr("src", "/Images/VoteDownColor.png");
+                    UpBtn.attr("src", "/Images/VoteUp.png");
 
-
-
-                }, error: function () { }
+                     }, error: function () { }
             });
+                   
 
 
+           }
+          
+         
+    });
 
-            }
+</script>
 
+<script>
+    $(".BTNHiddenEdit").click(function () {
 
-    });*@
+        $(this).parent().find(".NeedsValidation").show();
+        $(this).parent().find(".answer").hide();
+        $(this).hide();
 
-
+    });
 </script>
 
