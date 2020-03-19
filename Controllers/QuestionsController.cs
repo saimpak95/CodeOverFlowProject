@@ -48,10 +48,12 @@ namespace CodeOverFlowProject.Controllers
            
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult EditAnswer(EditAnswerViewModel answer)
         {
             answer.UserID = Convert.ToInt32(Session["CurrentUserID"]);
+            answer.AnswerDateAndTime = DateTime.Now;
             if (ModelState.IsValid)
             {
                 this.ass.UpdateAnswer(answer);
